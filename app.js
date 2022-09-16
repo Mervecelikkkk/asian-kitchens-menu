@@ -81,3 +81,28 @@ const menu = [
     desc: `Red bean paste dessert, serving with honey.`,
   },
 ];
+
+const btnContainer=document.querySelector(".btn-container")
+const section=document.querySelector(".section-center")
+
+const categories = menu.reduce(
+  (values, item) => {
+    if (!values.includes(item.category)) {
+      values.push(item.category);
+    }
+    return values;
+  },
+  ["All"]
+);
+console.log(categories)
+
+const categoryButtons = categories.map((item) =>{
+ return `<button type="button" class="btn btn-outline-dark me-3">${item}</button>`;
+}) 
+.join("");
+
+console.log(categoryButtons)
+btnContainer.innerHTML=categoryButtons;
+
+
+
