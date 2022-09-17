@@ -82,9 +82,10 @@ const menu = [
   },
 ];
 
-const btnContainer=document.querySelector(".btn-container")
-const section=document.querySelector(".section-center")
+const btnContainer = document.querySelector(".btn-container")
+const section = document.querySelector(".section-center")
 
+//With reduce it pulls categories in json data non-repeatably
 const categories = menu.reduce(
   (values, item) => {
     if (!values.includes(item.category)) {
@@ -96,13 +97,63 @@ const categories = menu.reduce(
 );
 console.log(categories)
 
-const categoryButtons = categories.map((item) =>{
- return `<button type="button" class="btn btn-outline-dark me-3">${item}</button>`;
-}) 
-.join("");
+const categoryList = () => {
 
-console.log(categoryButtons)
-btnContainer.innerHTML=categoryButtons;
+  //Adds category buttons with map function
+  const categoryButtons = categories.map((category) => {
+    return `<button type="button" class="btn btn-outline-dark btn-item me-3" data-id=${category}>${category}</button>`;
+  })
+    .join(""); //Method to remove commas from array
 
+  console.log(categoryButtons)
+  btnContainer.innerHTML = categoryButtons;
 
+  const filterCategoryBtn = document.querySelectorAll(".btn-item");
+
+  //Filtering with category buttons
+  filterCategoryBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const category = e.currentTarget.dataset.id;
+      console.log(category);
+      const menuCategory = menu.filter((menuItem) => {
+        if (menuItem.category === category) {
+          return menuItem;
+        }
+      });
+      if (category === "All") {
+        menuList(menu);
+      } else {
+        menuList(menuCategory);
+      }
+    });
+  });
+};
+
+categoryList();
+
+//menu listed with map function
+const menuList = (menuItems) => {
+  let displayMenu = menuItems.map((item) => {
+
+    return `<div class="menu-items col-lg-6 col-sm-12">
+              <img src=${item.img} alt=${item.title} class="photo"
+              />
+              <div class="menu-info">
+                <div class="menu-title">
+                  <h4>${item.title}</h4>
+                  <h4 class="price">${item.price}</h4>
+                </div>
+                <div class="menu-text">
+                  ${item.desc}
+                </div>
+              </div>
+            </div>
+      `;
+  });
+  
+  displayMenu = displayMenu.join("");
+  section.innerHTML = displayMenu;
+};
+
+menuList(menu);
 
