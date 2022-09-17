@@ -1,8 +1,7 @@
 # asian-kitchens-menu
 👩‍💻 Food menu to improve my javascript skills
 
-
-![asian-kitchens-menu](https://user-images.githubusercontent.com/51165242/190861796-350f69da-5cd7-48da-beef-74528b34672c.png)
+![asian-kitchens-menu](https://user-images.githubusercontent.com/51165242/190861907-1d7142aa-7363-476e-9673-b25e5ec4c4b6.png)
 
 ## Installation
 Clone the project.
